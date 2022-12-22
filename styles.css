@@ -1,0 +1,21 @@
+#mainCanvas{
+    border: 2px solid rgb(174, 63, 63);
+}
+
+#mainContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#secondaryContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+#controllerContainer{
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
