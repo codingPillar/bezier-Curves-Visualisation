@@ -37,6 +37,7 @@ export class Renderer{
     }
 
     public drawLine(f_point: Point, s_point: Point): void {
+        this.context.lineWidth = 2;
         this.context.strokeStyle = '#000000';
         this.context.beginPath();
         this.context.moveTo(f_point.getPosition().x, f_point.getPosition().y);
@@ -55,7 +56,8 @@ export class Renderer{
     }
 
     private drawBezierCurve(): void {
-        this.context.strokeStyle = '#000000';
+        this.context.lineWidth = 3;
+        this.context.strokeStyle = '#a100dd';
         this.initPath(Model.model.getBezierCurve());
         this.context.stroke();
     }
