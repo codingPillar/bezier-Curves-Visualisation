@@ -1,8 +1,5 @@
 import { CANVAS_ID, CANVAS_HEIGHT, ASPECT_RATIO } from "./constants.js";
 import { Renderer } from "./rendering/mainRenderer.js";
-
-import { Vec2 } from "./math/vec2.js";
-import { Point } from "./point.js";
 import { Controller } from "./controller.js";
 
 function main(){

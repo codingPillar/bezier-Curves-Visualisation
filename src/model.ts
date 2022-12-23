@@ -1,4 +1,4 @@
-import { CURVE_PRECISION, SLIDER_ID, SLIDER_MAX_VALUE, SLIDER_MIN_VALUE } from "./constants.js";
+import { CURVE_PRECISION, SLIDER_MAX_VALUE, SLIDER_MIN_VALUE } from "./constants.js";
 import { Vec2 } from "./math/vec2.js";
 import { Point } from "./point.js";
 
@@ -49,7 +49,7 @@ export class Model{
         while(points[points.length - 1].length > 1){
             const newPoints: Vec2[] = [];
             for(let i = 0; i < lastLayer.length - 1; i++) 
-            newPoints.push(Model.linearInterpolation(lastLayer[i], lastLayer[i+1], this.interpolationValue));
+                newPoints.push(Model.linearInterpolation(lastLayer[i], lastLayer[i+1], this.interpolationValue));
             points.push(newPoints);
             lastLayer = newPoints;
         }

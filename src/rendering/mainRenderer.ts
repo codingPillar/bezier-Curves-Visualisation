@@ -1,7 +1,6 @@
 import { POINT_RADIUS } from "../constants.js";
 import { Vec2 } from "../math/vec2.js";
 import { Model } from "../model.js";
-import { Point } from "../point.js";
 import { BACK_COLOR, ELLIPSE_PRECISION } from "./renderingConstants.js";
 
 export class Renderer{
