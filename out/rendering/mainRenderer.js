@@ -24,15 +24,16 @@ export class Renderer {
     }
     drawPoint(point, color, fill) {
         if (fill) {
-            this.context.strokeStyle = color;
-            this.drawEllipse(point.getPosition(), POINT_RADIUS);
-        }
-        else {
             this.context.fillStyle = color;
             this.fillEllipse(point.getPosition(), POINT_RADIUS);
         }
+        else {
+            this.context.strokeStyle = color;
+            this.drawEllipse(point.getPosition(), POINT_RADIUS);
+        }
     }
     drawLine(f_point, s_point) {
+        this.context.strokeStyle = '#000000';
         this.context.beginPath();
         this.context.moveTo(f_point.getPosition().x, f_point.getPosition().y);
         this.context.lineTo(s_point.getPosition().x, s_point.getPosition().y);

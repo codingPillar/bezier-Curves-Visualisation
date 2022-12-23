@@ -27,16 +27,17 @@ export class Renderer{
 
     public drawPoint(point: Point, color: string, fill: boolean): void{
         if(fill){
-            this.context.strokeStyle = color;
-            this.drawEllipse(point.getPosition(), POINT_RADIUS);
-        }
-        else{
             this.context.fillStyle = color;
             this.fillEllipse(point.getPosition(), POINT_RADIUS);
+        }
+        else{
+            this.context.strokeStyle = color;
+            this.drawEllipse(point.getPosition(), POINT_RADIUS);
         }
     }
 
     public drawLine(f_point: Point, s_point: Point): void {
+        this.context.strokeStyle = '#000000';
         this.context.beginPath();
         this.context.moveTo(f_point.getPosition().x, f_point.getPosition().y);
         this.context.lineTo(s_point.getPosition().x, s_point.getPosition().y);
