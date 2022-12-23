@@ -4,6 +4,7 @@ import { Model } from "../model.js";
 import { BACK_COLOR, ELLIPSE_PRECISION } from "./renderingConstants.js";
 export class Renderer {
     constructor(context) {
+        this.drawLineState = false;
         // cache the results for reuse
         this.ellipseVertex = [];
         this.context = context;
@@ -12,32 +13,34 @@ export class Renderer {
         this.background();
         const points = Model.model.getPoints();
         for (const point of points)
-            this.drawPoint(point, (point.selected) ? '#a0b011' : '#000000', true);
+            this.drawPoint(point.getPosition(), (point.selected) ? '#a0b011' : '#000000', true);
         for (let i = 0; i < points.length - 1; i++)
-            this.drawLine(points[i], points[i + 1]);
+            this.drawLine(points[i].getPosition(), points[i + 1].getPosition());
         this.drawBezierCurve();
+        if (this.drawLineState)
+            this.drawInterpolatedPoint();
     }
     background(color = BACK_COLOR) {
         this.context.fillStyle = color;
         this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
         this.context.fillRect(0, 0, this.context.canvas.width, this.context.canvas.height);
     }
-    drawPoint(point, color, fill) {
+    drawPoint(position, color, fill) {
         if (fill) {
             this.context.fillStyle = color;
-            this.fillEllipse(point.getPosition(), POINT_RADIUS);
+            this.fillEllipse(position, POINT_RADIUS);
         }
         else {
             this.context.strokeStyle = color;
-            this.drawEllipse(point.getPosition(), POINT_RADIUS);
+            this.drawEllipse(position, POINT_RADIUS);
         }
     }
     drawLine(f_point, s_point) {
         this.context.lineWidth = 2;
         this.context.strokeStyle = '#000000';
         this.context.beginPath();
-        this.context.moveTo(f_point.getPosition().x, f_point.getPosition().y);
-        this.context.lineTo(s_point.getPosition().x, s_point.getPosition().y);
+        this.context.moveTo(f_point.x, f_point.y);
+        this.context.lineTo(s_point.x, s_point.y);
         this.context.stroke();
     }
     drawEllipse(position, radius) {
@@ -47,6 +50,17 @@ export class Renderer {
     fillEllipse(position, radius) {
         this.ellipsePathInit(position, radius);
         this.context.fill();
+    }
+    drawInterpolatedPoint() {
+        const interpolatedPoints = Model.model.getInterpolationPoints();
+        for (let i = 1; i < interpolatedPoints.length; i++) {
+            const currentLayer = interpolatedPoints[i];
+            for (let i = 0; i < currentLayer.length; i++) {
+                this.drawPoint(currentLayer[i], '#ff8888', false);
+                if (i < currentLayer.length - 1)
+                    this.drawLine(currentLayer[i], currentLayer[i + 1]);
+            }
+        }
     }
     drawBezierCurve() {
         this.context.lineWidth = 3;

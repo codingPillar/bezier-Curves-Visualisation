@@ -8,9 +8,19 @@
             <h1>Bezier Curves</h1>
             <div id="secondaryContainer">
                 <div id="controllerContainer">
-                    <!-- add slider for interpolation value -->
                     <button id="addPointButton">ADD POINT</button>
                     <button id="removePointButton">REM POINT</button>
+                    <div>
+                        <label>Draw temp Lines:</label>
+                        <div class="box-1">
+                            <input type='checkbox' id="drawLineCheck"/>
+                            <span class="toogle"></span>
+                          </div>
+                    </div>
+                    <div class="slidecontainer">
+                        <label>Interpolation value:</label>
+                        <input type="range" min="0" max="100" value="50" class="slider" id="interpolationSlider">
+                    </div>
                 </div>
                 <canvas id="mainCanvas"></canvas>
             </div>

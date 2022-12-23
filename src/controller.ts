@@ -1,4 +1,4 @@
-import { ADD_BUTTON_ID, ASPECT_RATIO, CANVAS_HEIGHT, REMOVE_BUTTON_ID } from "./constants.js";
+import { ADD_BUTTON_ID, ASPECT_RATIO, CANVAS_HEIGHT, DRAW_LINES_CHECKBOX, REMOVE_BUTTON_ID, SLIDER_ID } from "./constants.js";
 import { Vec2 } from "./math/vec2.js";
 import { Model } from "./model.js";
 import { Point } from "./point.js";
@@ -16,11 +16,29 @@ export class Controller{
         this.canvas = canvas;
         this.addCanvasClickEvent();
         this.addButtonListeners();
+        this.addSliderListener();
+        this.addCheckBoxListener();
     }
 
     private addButtonListeners(): void {
         this.addPointButtonController();
         this.removePointButtonController();
+    }
+
+    private addSliderListener(): void {
+        const slider = document.getElementById(SLIDER_ID) as HTMLInputElement;
+        slider.addEventListener('input', (ev: Event) => {
+            Model.model.updateInterpolation(Number.parseInt(slider.value));
+            this.renderer.drawScene();
+        });
+    }
+
+    private addCheckBoxListener(): void {
+        const checkBox = document.getElementById(DRAW_LINES_CHECKBOX) as HTMLInputElement;
+        checkBox.addEventListener('input', () => {
+            this.renderer.drawLineState = checkBox.checked;
+            this.renderer.drawScene();
+        });
     }
 
     private addPointButtonController(): void{
