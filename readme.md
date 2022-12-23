@@ -5,6 +5,7 @@
 3- you can use the tool directly on github, follow this link: https://codingpillar.github.io/bezier-Curves-Visualisation/
 
 // USAGE:
+
 -Pressing the add button will add a new point in the center of the canvas, so make sure you move it to see the curve because the points are otherwise are stacked and no interesting curves appears.
 
 -Pressing the REM POINT button will remove the last added point.
