@@ -1,3 +1,7 @@
+**Bezier Curve visualisation**
+
+**Author: Adam El-Houssami**
+
 1- js ready files present in the out folder
 
 2- you can generate them by calling the tsc command (make sure you have typescript installed)
